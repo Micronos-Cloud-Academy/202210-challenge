@@ -6,8 +6,9 @@ Sample workflow:
 name: Mica Challenge Workflow
 
 on:
- workflow_dispatch
- push
+ workflow_dispatch:
+ push:
+   branches: [main]
 
 env:
   SERVER: server001
@@ -21,12 +22,14 @@ jobs:
     env:
       MESSAGE: Variable available to all steps in the job
     steps:
+      - uses: actions/checkout@v3
       - id: step1
         name: Say Hello
         env:
           USERNAME: Geert
         run: |
           echo Hello $USERNAME, welcome to $CLOUD
+          cat README.md
       - name: Print env vars
         # see https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables
         run: |
@@ -53,6 +56,6 @@ jobs:
     if: ${{ github.actor == 'gbaeke'}}
     runs-on: ubuntu-latest
     steps:
-      - name: Hello from job 5 with expression
+      - name: Hello from job 3 with expression
         run: echo Hello $GITHUB_ACTOR
 ```

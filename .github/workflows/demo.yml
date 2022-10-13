@@ -1,8 +1,9 @@
 name: Mica Challenge Workflow
 
 on:
- workflow_dispatch
- push
+ workflow_dispatch:
+ push:
+   branches: [main]
 
 env:
   SERVER: server001
